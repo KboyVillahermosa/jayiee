@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HI CRUSH</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 600px; /* Max width */
+            text-align: center; /* Center the content */
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Image */
+        .final-image {
+            display: none;
+            justify-content: center;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto; /* Center the image */
+        }
+        .image-contents {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px; /* Add some space between images */
+        }
+        .image-contents img {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Center button */
+        #clickButton {
+            display: block;
+            margin: 20px auto; /* Center the button */
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 300px;
+        }
+
+        /* Styled buttons */
+        .modal-content button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .modal-content button:hover {
+            background-color: #005F6B;
+        }
+
+        /* Styled text */
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button id="clickButton" onclick="showModal()">CLICK</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>How is your day, <span id="userName"></span>?</p>
+            <button onclick="showNextAdvice()">Get advice</button>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Advice Modal -->
+    <div id="adviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdviceModal()">&times;</span>
+            <p id="adviceText"></p>
+            <button onclick="showNextAdvice()">Next Advice</button>
+            <button onclick="showFinalImage()">Show Final Image</button>
+        </div>
+    </div>
+
+    <!-- Final Images -->
+    <div class="final-image">
+        <div class="image-contents">
+            <img src="cute-please.gif" alt="Final Image 1">
+        </div>
+        <div class="image-contents">
+            <img src="you-got-this (1).gif" alt="Final Image 2">
+        </div>
+        <div class="image-contents">
+            <img src="nike-tagline-just-do-it-motivation-n67g67cm8a5ac91s.gif" alt="Final Image 3">
+        </div>
+        <div class="image-contents">
+            <img src="200w.gif" alt="Final Image 4">
+        </div>
+        <div class="image-contents">
+            <img src="never.webp" alt="Final Image 4">
+        </div>
+        <div class="image-contents">
+            <H1>mwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</H1>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var adviceIndex = 0;
+        var advices = [
+            "Life is about taking risks and embracing change. Don't be afraid to step out of your comfort zone and pursue your dreams.",
+            "Learn from your mistakes. They are opportunities for growth and self-improvement.",
+            "Stay true to yourself and your values. Don't let others dictate your path in life.",
+            "Practice gratitude and kindness. Small acts of kindness can have a big impact on others and yourself.",
+            "Believe in yourself and your abilities. You are capable of achieving great things.",
+            "Communication is key in any relationship. Always be open and honest with your partner.",
+            "Respect each other's boundaries and individuality. A healthy relationship requires mutual respect.",
+            "Don't rush love. Let it develop naturally and at its own pace.",
+            "Compromise is essential for a successful relationship. Learn to find common ground and solve conflicts together.",
+            "Choose someone who brings out the best in you and supports your goals and aspirations."
+        ];
+
+        function showModal() {
+            var modal = document.getElementById('myModal');
+            var userName = prompt('What is your name?');
+            if (userName && userName.trim() !== '') {
+                document.getElementById('userName').innerText = userName;
+                modal.style.display = "block";
+            } else {
+                alert('Invalid name');
+            }
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+
+        function showAdviceModal() {
+            var adviceModal = document.getElementById('adviceModal');
+            var adviceText = document.getElementById('adviceText');
+            closeModal();
+            adviceText.innerText = advices[adviceIndex];
+            adviceModal.style.display = "block";
+        }
+
+        function closeAdviceModal() {
+            var adviceModal = document.getElementById('adviceModal');
+            adviceModal.style.display = "none";
+        }
+
+        function showNextAdvice() {
+            adviceIndex++;
+            if (adviceIndex < advices.length) {
+                showAdviceModal();
+            } else {
+                showFinalImage();
+            }
+        }
+
+        function showFinalImage() {
+            var finalImages = document.querySelectorAll('.final-image');
+            var adviceModal = document.getElementById('adviceModal');
+            var clickButton = document.getElementById('clickButton');
+            adviceModal.style.display = "none";
+            finalImages.forEach(function(image) {
+                image.style.display = "block";
+            });
+            clickButton.style.display = "none";
+        }
+    </script>
+</body>
+</html>
